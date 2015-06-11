@@ -34,6 +34,11 @@ public class Peliculas {
         this.enPosesion = enPosesion;
         this.categoria = categoria;
     }
+
+    @Override
+    public String toString() {
+        return "Peliculas{" + "nombrePelicula=" + nombrePelicula + ", cantidad=" + cantidad + ", categoria=" + categoria + '}';
+    }
     
    
 /**

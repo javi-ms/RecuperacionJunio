@@ -138,7 +138,7 @@ public class MainDialog extends javax.swing.JDialog {
 
         jLabel5.setText("Genero");
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Añadir XML");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

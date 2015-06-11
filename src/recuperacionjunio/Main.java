@@ -54,7 +54,7 @@ public class Main extends javax.swing.JFrame {
         jButtonSubir = new javax.swing.JButton();
         jButtonMostrarDialog = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
-        jButtonSubir1 = new javax.swing.JButton();
+        jButtonBajar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,10 +83,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButtonSubir1.setText("Bajar");
-        jButtonSubir1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBajar.setText("Bajar");
+        jButtonBajar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSubir1ActionPerformed(evt);
+                jButtonBajarActionPerformed(evt);
             }
         });
 
@@ -110,7 +110,7 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButtonSubir)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonSubir1)))
+                                .addComponent(jButtonBajar)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,7 +128,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSubir, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonMostrarDialog)
-                    .addComponent(jButtonSubir1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonBajar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
@@ -142,15 +142,24 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubirActionPerformed
-        //  recogida de datos        
-        // el +1 es para recoger los datos correctamente     
-        pos1 = Integer.valueOf(jTextField1.getText())-1;
-        
-        if (pos1 >= 0 && pos1 <= genero.peliculas.size()) {
-                genero.movimiento(pos1, false);
-                jTextArea1.setText(genero.mostrarGenero());
-        } else {
-            JOptionPane.showMessageDialog(this, "el numero indicado no esta en la lista");
+        genero.mostrarGenero().isEmpty();
+        try {
+            //  recogida de datos        
+            // el +1 es para recoger los datos correctamente     
+            pos1 = Integer.valueOf(jTextField1.getText()) - 1;
+            pos2 = Integer.valueOf(jTextField2.getText()) - 1;
+
+            if (pos1 >= 0 && pos1 <= genero.peliculas.size()) {
+                if (pos2 >= 0 && pos2 <= genero.peliculas.size()) {
+                    genero.movimiento(pos1, false);
+                    jTextArea1.setText(genero.mostrarGenero());
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "el numero indicado tiene que ser mayor que cero");
+                }
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: El valor indicado no es un número");
         }
     }//GEN-LAST:event_jButtonSubirActionPerformed
 
@@ -163,11 +172,24 @@ public class Main extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonMostrarDialogActionPerformed
 
-    private void jButtonSubir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubir1ActionPerformed
-        pos1 = Integer.valueOf(jTextField1.getText())-1;
-        genero.movimiento(pos1,true);
-        jTextArea1.setText(genero.mostrarGenero());
-    }//GEN-LAST:event_jButtonSubir1ActionPerformed
+    private void jButtonBajarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajarActionPerformed
+        genero.mostrarGenero().isEmpty();
+        try {
+            pos1 = Integer.valueOf(jTextField1.getText()) - 1;
+            pos2 = Integer.valueOf(jTextField2.getText()) - 1;
+            if (pos1 >= 0 && pos1 <= genero.peliculas.size()) {
+                if (pos2 >= 0 && pos2 <= genero.peliculas.size()) {
+                    genero.movimiento(pos1, true);
+                    jTextArea1.setText(genero.mostrarGenero());
+                } else {
+                    JOptionPane.showMessageDialog(this, "el numero indicado tiene que ser mayor que cero");
+                }
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: El valor indicado no es un número");
+        }
+
+    }//GEN-LAST:event_jButtonBajarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,9 +228,9 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonBajar;
     private javax.swing.JButton jButtonMostrarDialog;
     private javax.swing.JButton jButtonSubir;
-    private javax.swing.JButton jButtonSubir1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
