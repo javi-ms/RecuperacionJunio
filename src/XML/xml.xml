@@ -1,0 +1,23 @@
+<Peliculas>
+	<Pelicula>
+	   <nombrePelicula>Los vengadores</nombrePelicula>
+      <fechaSalida>2013</fechaSalida>
+      <cantidad>2</cantidad>
+      <enPosesion>false</enPosesion>
+      <categoria>Ciencia Ficcion</categoria>
+	</Pelicula>
+	<Pelicula>
+	   <nombrePelicula>El Padrino</nombrePelicula>
+      <fechaSalida>1989</fechaSalida>
+      <cantidad>3</cantidad>
+      <enPosesion>true</enPosesion>
+      <categoria>Ciencia Ficcion</categoria>
+	</Pelicula>
+	<Pelicula>
+	   <nombrePelicula>X-men</nombrePelicula>
+      <fechaSalida>2012</fechaSalida>
+      <cantidad>6</cantidad>
+      <enPosesion>false</enPosesion>
+      <categoria>Ciencia Ficcion</categoria>
+	</Pelicula>
+</Peliculas>

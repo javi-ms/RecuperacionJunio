@@ -19,7 +19,7 @@ public class Generos {
     //"Ciencia Ficcion","Aventuras","Artes Marciales","Historicas","Animadas"
     private String[] categoriaGeneros = {"Ciencia Ficcion", "Aventuras", "Artes Marciales", "Historicas", "Animadas"};
 
-//declararlo dentro para que cada ve que se ejecute se inicie se puede realizar con la i
+    //declararlo dentro para que cada ve que se ejecute se inicie se puede realizar con la i
     //creacion de un string para almacenar 
     /**
      * Nos permitira añadir peliculas no retorna nada
@@ -62,28 +62,19 @@ public class Generos {
      */
     public String mostrarGenero() {
         String genero = "";
-//para que el usuario lo controle -1
+    //para que el usuario lo controle -1
         for (int i = 0; i < categoriaGeneros.length; i++) {
             genero += i + 1 + "~ " + categoriaGeneros[i] + "\n";
 
         }
         return genero;
     }
-//cuando no retorna nada no necesita String
-//modificar movimiento es de x a y
+    //cuando no retorna nada no necesita String
+    //modificar movimiento es de x a y
 
     void movimiento(int pos1, boolean sube) {
         //debemos recoger dos posiciones
         //la posicion uno se movera a la dos y la dos a la uno
-
-//        //posicion Siguiente
-//        String posSiguiente = categoriaGeneros[pos2];
-//
-//        //mover la posicion a la posicion siguiente
-//        categoriaGeneros[pos2] = categoriaGeneros[pos1];
-//
-//        //la posicion siguiente la movemos a la anterior
-//        categoriaGeneros[pos1] = posSiguiente;
         if (sube) {
             //recogemos la posicion siguiente en una variable
             String posAnt = categoriaGeneros[pos1 + 1];
@@ -98,12 +89,4 @@ public class Generos {
         }
     }
 
-//    public String posesion(boolean posesion) {
-//        if (posesion) {
-//
-//        } else {
-//
-//        }
-//        return 
-//    }
 }

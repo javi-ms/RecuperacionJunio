@@ -145,7 +145,6 @@ public class Main extends javax.swing.JFrame {
         //  recogida de datos        
         // el +1 es para recoger los datos correctamente     
         pos1 = Integer.valueOf(jTextField1.getText())-1;
-//        pos2 = Integer.valueOf(jTextField2.getText()) - 1;
         
         if (pos1 >= 0 && pos1 <= genero.peliculas.size()) {
                 genero.movimiento(pos1, false);

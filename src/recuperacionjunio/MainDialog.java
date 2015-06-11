@@ -5,7 +5,17 @@
  */
 package recuperacionjunio;
 
+import java.io.IOException;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -29,7 +39,7 @@ public class MainDialog extends javax.swing.JDialog {
     }
 
     /**
-     *
+     *Nos permitira mostrar los datos de una pelicula
      *
      */
     private void mostrarDatos() {
@@ -59,6 +69,7 @@ public class MainDialog extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -127,6 +138,13 @@ public class MainDialog extends javax.swing.JDialog {
 
         jLabel5.setText("Genero");
 
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,13 +177,15 @@ public class MainDialog extends javax.swing.JDialog {
                                 .addGap(29, 29, 29)
                                 .addComponent(jLabel5))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton1)
-                                    .addComponent(jButtonModificar))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonModificar)
+                                    .addComponent(jButton1))
                                 .addGap(26, 26, 26)
                                 .addComponent(jButtonNuevo)))
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -194,7 +214,8 @@ public class MainDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonModificar)
-                    .addComponent(jButtonNuevo))
+                    .addComponent(jButtonNuevo)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap(12, Short.MAX_VALUE))
@@ -203,7 +224,7 @@ public class MainDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 /**
-     *
+     *Nos moveremos hacia adelante en el listado de peliculas
      *
      */
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
@@ -229,10 +250,10 @@ public class MainDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonSiguienteActionPerformed
 
     private void jTextFieldGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldGeneroActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTextFieldGeneroActionPerformed
     /**
-     *
+     *Nos moveremos hacia atras en el listado de peliculas
      *
      */
     private void jButtonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnteriorActionPerformed
@@ -256,26 +277,19 @@ public class MainDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonAnteriorActionPerformed
     /**
-     *
+     *nos pondra en blanco todos las areas de texto
      *
      */
     private void jButtonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoActionPerformed
-        
+
         jTextFieldNombre.setText("");
         jTextFieldFecha.setText("");
         jTextFieldCantidad.setText("");
         jTextFieldPosesion.setText("");
         jTextFieldGenero.setText("");
-//crear objeto
-        //mostrar objeto
-        //llamar al metodo modificar
-         //hay que añadir una nueva linea
-//                genero.peliculas.add(new Peliculas());
-
-
     }//GEN-LAST:event_jButtonNuevoActionPerformed
     /**
-     *
+     *Nos permitira modificar la pelicula
      *
      */
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
@@ -288,26 +302,98 @@ public class MainDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nombre=jTextFieldNombre.getText();
-        int fechaSalida= Integer.valueOf(jTextFieldFecha.getText());
+        String nombre = jTextFieldNombre.getText();
+        int fechaSalida = Integer.valueOf(jTextFieldFecha.getText());
         int cantidad = Integer.valueOf(jTextFieldCantidad.getText());
         String posesion = jTextFieldPosesion.getText();
         String generos = jTextFieldGenero.getText();
-        
+
         //guarda en una variable boolean y te la compara a la hora de escribirla
         boolean enPosesion = false;
         if (posesion.equals("true")) {
-            enPosesion=true;
+            enPosesion = true;
         }
-        
+
         //añade la pelicula
-        genero.peliculas.add(genero.peliculas.size()-1,new Peliculas(nombre, fechaSalida, cantidad, enPosesion, generos));
-        
+        genero.peliculas.add(genero.peliculas.size() - 1, new Peliculas(nombre, fechaSalida, cantidad, enPosesion, generos));
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextFieldPosesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPosesionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPosesionActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //nos crea un objeto filechooser y nos permitira abrirlo
+        JFileChooser leerXML = new JFileChooser();
+        leerXML.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+
+        if (leerXML.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            String direccion = leerXML.getSelectedFile().getAbsolutePath();
+
+            try {
+                DocumentBuilderFactory fábricaCreadorDocumento = DocumentBuilderFactory.newInstance();
+                DocumentBuilder creadorDocumento = fábricaCreadorDocumento.newDocumentBuilder();
+                Document documento = creadorDocumento.parse(direccion);
+                //Obtener el elemento raíz del documento
+                Element raiz = documento.getDocumentElement();
+
+                //Obtener la lista de nodos que tienen etiqueta "EMPLEADO"
+                NodeList datosPeliculas = raiz.getElementsByTagName("Pelicula");
+                //Recorrer la lista de empleados
+                
+                for (int i =0; i < datosPeliculas.getLength(); i++) {
+                    //Obtener de la lista un movil tras otro
+                    Node movil1 = datosPeliculas.item(i);                    
+                    Peliculas añadirPeli = new Peliculas();
+                    //Obtener la lista de los datos que contiene ese movil
+                    NodeList datosPeli = movil1.getChildNodes();
+                    //Recorrer la lista de los datos que contiene el movil
+                    for (int j = 0; j < datosPeli.getLength(); j++) {
+                        //Obtener de la lista de datos un dato tras otro
+                        Node dato = datosPeli.item(j);
+                     
+                        //Comprobar que el dato se trata de un nodo de tipo Element
+                        if (dato.getNodeType() == Node.ELEMENT_NODE) {
+                            //Mostrar el nombre del tipo de dato
+                            if (dato.getNodeName().equalsIgnoreCase("nombrePelicula")) {
+                                añadirPeli.setNombrePelicula(dato.getFirstChild().getNodeValue());
+                            }
+                            if (dato.getNodeName().equalsIgnoreCase("fechaSalida")) {
+                                añadirPeli.setFechaSalida(Integer.valueOf(dato.getFirstChild().getNodeValue()));
+                            }
+                            if (dato.getNodeName().equalsIgnoreCase("cantidad")) {
+                                añadirPeli.setFechaSalida(Integer.valueOf(dato.getFirstChild().getNodeValue()));
+                            }
+                            if (dato.getNodeName().equalsIgnoreCase("enPosesion")) {
+                                String enPos = dato.getFirstChild().getNodeValue();                                
+                                //Creo una variable booleana para que recoja el String "true" y lo pase como boolean
+                                boolean enPosesion = false;
+                                if (enPos.equals("true")) {
+                                    enPosesion = true;
+                                }
+                                añadirPeli.setEnPosesion(enPosesion);
+                            }
+                            if (dato.getNodeName().equalsIgnoreCase("categoria")) {
+                                añadirPeli.setCategoria((dato.getFirstChild().getNodeValue()));
+                            }
+                        }
+                    }
+                    //Guarda en las caracteristicas del movil el xml
+                   genero.peliculas.add(añadirPeli);
+                }
+            } catch (SAXException ex) {
+                System.out.println("ERROR: El formato XML del fichero no es correcto\n" + ex.getMessage());
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                System.out.println("ERROR: Se ha producido un error el leer el fichero\n" + ex.getMessage());
+                ex.printStackTrace();
+            } catch (ParserConfigurationException ex) {
+                System.out.println("ERROR: No se ha podido crear el generador de documentos XML\n" + ex.getMessage());
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,6 +439,7 @@ public class MainDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAnterior;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JButton jButtonNuevo;
