@@ -249,8 +249,8 @@ public class MainDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 /**
-     * Nos moveremos hacia adelante en el listado de peliculas
-     * y nos permitira guardar los datos modificados
+     * Nos moveremos hacia adelante en el listado de peliculas y nos permitira
+     * guardar los datos modificados
      */
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
         //modificacion del objeto
@@ -274,24 +274,22 @@ public class MainDialog extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jTextFieldGeneroActionPerformed
     /**
-     * Nos moveremos hacia atras en el listado de peliculas
-     * y nos permitira guardar los datos modificados
+     * Nos moveremos hacia atras en el listado de peliculas y nos permitira
+     * guardar los datos modificados
      */
     private void jButtonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnteriorActionPerformed
         //modificacion del objeto
         modificarDatos();
         if (contador > 0) {
-            try {
-                genero.adelantarPelicula(--contador);
 
-                jTextFieldNombre.setText(genero.pelicula.getNombrePelicula());
-                jTextFieldFecha.setText(String.valueOf(genero.pelicula.getFechaSalida()));
-                jTextFieldPosesion.setText(String.valueOf(genero.pelicula.isEnPosesion()));
-                jTextFieldCantidad.setText(String.valueOf(genero.pelicula.getCantidad()));
-                jTextFieldGenero.setText(genero.pelicula.getCategoria());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Error: El valor indicado no es un número");
-            }
+            genero.adelantarPelicula(--contador);
+
+            jTextFieldNombre.setText(genero.pelicula.getNombrePelicula());
+            jTextFieldFecha.setText(String.valueOf(genero.pelicula.getFechaSalida()));
+            jTextFieldPosesion.setText(String.valueOf(genero.pelicula.isEnPosesion()));
+            jTextFieldCantidad.setText(String.valueOf(genero.pelicula.getCantidad()));
+            jTextFieldGenero.setText(genero.pelicula.getCategoria());
+
         } else {
             JOptionPane.showMessageDialog(this, "ya no ha mas peliculas");
         }
@@ -317,21 +315,24 @@ public class MainDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-        String nombre = jTextFieldNombre.getText();
-        int fechaSalida = Integer.valueOf(jTextFieldFecha.getText());
-        int cantidad = Integer.valueOf(jTextFieldCantidad.getText());
-        String posesion = jTextFieldPosesion.getText();
-        String generos = jTextFieldGenero.getText();
+        try {
+            String nombre = jTextFieldNombre.getText();
+            int fechaSalida = Integer.valueOf(jTextFieldFecha.getText());
+            int cantidad = Integer.valueOf(jTextFieldCantidad.getText());
+            String posesion = jTextFieldPosesion.getText();
+            String generos = jTextFieldGenero.getText();
 
-        //guarda en una variable boolean y te la compara a la hora de escribirla
-        boolean enPosesion = false;
-        if (posesion.equals("true")) {
-            enPosesion = true;
+            //guarda en una variable boolean y te la compara a la hora de escribirla
+            boolean enPosesion = false;
+            if (posesion.equals("true")) {
+                enPosesion = true;
+            }
+
+            //añade la pelicula
+            Generos.peliculas.add(Generos.peliculas.size() - 1, new Peliculas(nombre, fechaSalida, cantidad, enPosesion, generos));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: El valor indicado no es un número");
         }
-
-        //añade la pelicula
-        Generos.peliculas.add(Generos.peliculas.size() - 1, new Peliculas(nombre, fechaSalida, cantidad, enPosesion, generos));
-
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jTextFieldPosesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPosesionActionPerformed
@@ -412,39 +413,37 @@ public class MainDialog extends javax.swing.JDialog {
 
     private void jButtonCrearCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearCSVActionPerformed
         //creacion de una variable con el String
-        String nombreFichero = "Filmoteca.txt";        
+        String nombreFichero = "Filmoteca.txt";
         BufferedWriter bw = null;
-        
-        try {            
+
+        try {
             //creacion del objeto bufferedwritter
             bw = new BufferedWriter(new FileWriter(nombreFichero));
-            
+
             for (int i = 0; i < Generos.peliculas.size(); i++) {
                 //
                 String texto;
-                String nombre= Generos.peliculas.get(i).getNombrePelicula();
-                int fechaSalida=Generos.peliculas.get(i).getFechaSalida();
-                int cantidad= Generos.peliculas.get(i).getCantidad();
-                boolean enPosesion=Generos.peliculas.get(i).isEnPosesion();
-                String categoria=Generos.peliculas.get(i).getCategoria();
-               
+                String nombre = Generos.peliculas.get(i).getNombrePelicula();
+                int fechaSalida = Generos.peliculas.get(i).getFechaSalida();
+                int cantidad = Generos.peliculas.get(i).getCantidad();
+                boolean enPosesion = Generos.peliculas.get(i).isEnPosesion();
+                String categoria = Generos.peliculas.get(i).getCategoria();
+
                 //
-                texto= nombre +"\t"+fechaSalida+"\t"+cantidad+"\t"+enPosesion+"\t"+categoria+ "\r\n";                
+                texto = nombre + "\t" + fechaSalida + "\t" + cantidad + "\t" + enPosesion + "\t" + categoria + "\r\n";
                 bw.write(texto);
-            }          
-            JOptionPane.showMessageDialog(this,"filmoteca creada");
-        }
-        catch(IOException | HeadlessException e) {
-           JOptionPane.showMessageDialog(this,"Error de escritura del fichero");          
-        }
-        finally {
+            }
+            JOptionPane.showMessageDialog(this, "filmoteca creada");
+        } catch (IOException | HeadlessException e) {
+            JOptionPane.showMessageDialog(this, "Error de escritura del fichero");
+        } finally {
             try {
                 //Cerrar el buffer
-                if(bw != null)
+                if (bw != null) {
                     bw.close();
-            }
-            catch (Exception e) {
-                JOptionPane.showMessageDialog(this,"Error al cerrar el fichero");                
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al cerrar el fichero");
             }
         }
     }//GEN-LAST:event_jButtonCrearCSVActionPerformed
