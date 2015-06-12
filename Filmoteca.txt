@@ -1,0 +1,3 @@
+Star wars	1977	1	true	Ciencia Ficcion
+Esdla	2001	3	true	Medieval
+Harry potter	2000	7	false	Magia

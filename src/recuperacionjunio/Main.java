@@ -142,7 +142,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubirActionPerformed
-        genero.mostrarGenero().isEmpty();
+       
         try {
             //  recogida de datos        
             // el +1 es para recoger los datos correctamente     
@@ -173,7 +173,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonMostrarDialogActionPerformed
 
     private void jButtonBajarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajarActionPerformed
-        genero.mostrarGenero().isEmpty();
+        
         try {
             pos1 = Integer.valueOf(jTextField1.getText()) - 1;
             pos2 = Integer.valueOf(jTextField2.getText()) - 1;
