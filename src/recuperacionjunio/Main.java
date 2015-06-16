@@ -16,26 +16,16 @@ import javax.swing.JOptionPane;
  */
 public class Main extends javax.swing.JFrame {
 
-    public Generos genero = new Generos();
-    int pos1;
-    int pos2;
+    public Generos genero;
 
     public Main() {
         initComponents();
         //creamos un objeto fuente y le ponemos el tipo de letra, el formato y el tamaño
         Font cajaTexto = new Font("Times New Roman", Font.ITALIC, 20);
 
-        jTextArea1.setFont(cajaTexto);
-
-        //imagen recogida de la web http://tamtampress.es/2012/11/28/sube-arriba/
-        //ImageIcon icono = new ImageIcon("Imagenes/subir.jpg");
-        // Image subir = new ImageIcon(this.getClass().getResource("/Imagenes/subir.jpg")).getImage();
-        //modificar a mano
-        //   subir = subir.getScaledInstance(20, 20, Image.SCALE_FAST);
-        //jButtonSubir.setIcon(new ImageIcon(getClass().getResource("/Imagenes/subir.jpg")));
-        // jButtonSubir.setIcon(new ImageIcon(subir));
-        //jButtonSubir.setIcon(icono);
-        genero.añadirPelis();
+       
+        
+// System.out.println(genero.escaparate[0][0].toString());
     }
 
     /**
@@ -49,32 +39,18 @@ public class Main extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButtonSubir = new javax.swing.JButton();
         jButtonMostrarDialog = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jButtonBajar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
-
-        jButton1.setText("Mostrar Todo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButtonSubir.setText("Subir");
-        jButtonSubir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSubirActionPerformed(evt);
-            }
-        });
 
         jButtonMostrarDialog.setText("Peliculas");
         jButtonMostrarDialog.addActionListener(new java.awt.event.ActionListener() {
@@ -83,10 +59,18 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButtonBajar.setText("Bajar");
-        jButtonBajar.addActionListener(new java.awt.event.ActionListener() {
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane3.setViewportView(jTextArea3);
+
+        jButton1.setText("Actualizar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBajarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -97,71 +81,33 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButtonMostrarDialog))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonSubir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonBajar)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 33, Short.MAX_VALUE))))
+                        .addComponent(jButtonMostrarDialog)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSubir, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonMostrarDialog)
-                    .addComponent(jButtonBajar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                    .addComponent(jButton1))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jTextArea1.setText(genero.mostrarGenero());
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButtonSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubirActionPerformed
-       
-        try {
-            //  recogida de datos        
-            // el +1 es para recoger los datos correctamente     
-            pos1 = Integer.valueOf(jTextField1.getText()) - 1;
-            pos2 = Integer.valueOf(jTextField2.getText()) - 1;
-
-            if (pos1 >= 0 && pos1 <= genero.peliculas.size()) {
-                if (pos2 >= 0 && pos2 <= genero.peliculas.size()) {
-                    genero.movimiento(pos1, false);
-                    jTextArea1.setText(genero.mostrarGenero());
-
-                } else {
-                    JOptionPane.showMessageDialog(this, "el numero indicado tiene que ser mayor que cero");
-                }
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error: El valor indicado no es un número");
-        }
-    }//GEN-LAST:event_jButtonSubirActionPerformed
 
     private void jButtonMostrarDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarDialogActionPerformed
         //creacion del objeto dialog
@@ -172,24 +118,27 @@ public class Main extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_jButtonMostrarDialogActionPerformed
 
-    private void jButtonBajarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajarActionPerformed
+    @SuppressWarnings("empty-statement")
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.out.println(genero.escaparate[0][0].toString());
         
-        try {
-            pos1 = Integer.valueOf(jTextField1.getText()) - 1;
-            pos2 = Integer.valueOf(jTextField2.getText()) - 1;
-            if (pos1 >= 0 && pos1 <= genero.peliculas.size()) {
-                if (pos2 >= 0 && pos2 <= genero.peliculas.size()) {
-                    genero.movimiento(pos1, true);
-                    jTextArea1.setText(genero.mostrarGenero());
-                } else {
-                    JOptionPane.showMessageDialog(this, "el numero indicado tiene que ser mayor que cero");
-                }
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Error: El valor indicado no es un número");
-        }
 
-    }//GEN-LAST:event_jButtonBajarActionPerformed
+        try {
+            jTextArea1.setText(genero.escaparate[0][0].toString());
+        } catch (NullPointerException e) {
+            jTextArea1.setText("");
+        };
+                try {
+            jTextArea2.setText(genero.escaparate[1][0].toString());
+        } catch (NullPointerException e) {
+            jTextArea2.setText("");
+        };
+                try {
+            jTextArea3.setText(genero.escaparate[2][0].toString());
+        } catch (NullPointerException e) {
+            jTextArea2.setText("");
+        };
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,12 +177,12 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonBajar;
     private javax.swing.JButton jButtonMostrarDialog;
-    private javax.swing.JButton jButtonSubir;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     // End of variables declaration//GEN-END:variables
 }

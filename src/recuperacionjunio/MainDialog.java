@@ -33,8 +33,6 @@ public class MainDialog extends javax.swing.JDialog {
      *
      *
      * @param parent
-     * @param parent
-     * @param modal
      * @param modal
      */
     public MainDialog(java.awt.Frame parent, boolean modal) {
@@ -86,6 +84,10 @@ public class MainDialog extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jButtonAñadirXML = new javax.swing.JButton();
         jButtonCrearCSV = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -168,6 +170,20 @@ public class MainDialog extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -175,6 +191,13 @@ public class MainDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton1))
                     .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonSiguiente)
@@ -206,9 +229,14 @@ public class MainDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButtonGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -242,8 +270,15 @@ public class MainDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonGuardar)
-                    .addComponent(jButtonCrearCSV))
-                .addContainerGap(12, Short.MAX_VALUE))
+                    .addComponent(jButtonCrearCSV)
+                    .addComponent(jButton2))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -341,37 +376,52 @@ public class MainDialog extends javax.swing.JDialog {
 
     private void jButtonAñadirXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAñadirXMLActionPerformed
         //nos crea un objeto filechooser y nos permitira abrirlo
+        //el jfileChooser abre la ventana
         JFileChooser leerXML = new JFileChooser();
+        //hace que se muestre los ficheros y directorios
+        //sin la linea FILES_AND_DIRECTORIES solo se mostrarian los archivos
         leerXML.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
+        //
         if (leerXML.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+
+            //te da la ruta absoluta de donde esta el archivo puesto
             String direccion = leerXML.getSelectedFile().getAbsolutePath();
 
             try {
+                //crea el archivo XML
                 DocumentBuilderFactory fábricaCreadorDocumento = DocumentBuilderFactory.newInstance();
                 DocumentBuilder creadorDocumento = fábricaCreadorDocumento.newDocumentBuilder();
+
+                //aqui viene la ruta desde variable direccion
                 Document documento = creadorDocumento.parse(direccion);
+
                 //Obtener el elemento raíz del documento
                 Element raiz = documento.getDocumentElement();
 
-                //Obtener la lista de nodos que tienen etiqueta "EMPLEADO"
+                //obtiene todo los elementos que tengan la etiqueta pelicula. Todo lo que se llame pelicula
                 NodeList datosPeliculas = raiz.getElementsByTagName("Pelicula");
-                //Recorrer la lista de empleados
 
+                //Recorrer la lista de Pelicula
+                //te recorre los datosPlicula
                 for (int i = 0; i < datosPeliculas.getLength(); i++) {
-                    //Obtener de la lista un movil tras otro
-                    Node movil1 = datosPeliculas.item(i);
+                    //Obtener de la lista un Pelicula tras otro
+                    //guarda los datos de todas las peliculas
+                    Node pelicula1 = datosPeliculas.item(i);
                     Peliculas añadirPeli = new Peliculas();
-                    //Obtener la lista de los datos que contiene ese movil
-                    NodeList datosPeli = movil1.getChildNodes();
-                    //Recorrer la lista de los datos que contiene el movil
+                    //Obtener la lista de los datos que contiene la Pelicula
+                    NodeList datosPeli = pelicula1.getChildNodes();
+
+                    //Recorrer la lista de los datos que contiene la Pelicula
                     for (int j = 0; j < datosPeli.getLength(); j++) {
+
                         //Obtener de la lista de datos un dato tras otro
                         Node dato = datosPeli.item(j);
 
                         //Comprobar que el dato se trata de un nodo de tipo Element
                         if (dato.getNodeType() == Node.ELEMENT_NODE) {
-                            //Mostrar el nombre del tipo de dato
+
+                            //Recoge la informacion de los nodos
                             if (dato.getNodeName().equalsIgnoreCase("nombrePelicula")) {
                                 añadirPeli.setNombrePelicula(dato.getFirstChild().getNodeValue());
                             }
@@ -420,8 +470,9 @@ public class MainDialog extends javax.swing.JDialog {
             //creacion del objeto bufferedwritter
             bw = new BufferedWriter(new FileWriter(nombreFichero));
 
+            //recorre el arrayList
             for (int i = 0; i < Generos.peliculas.size(); i++) {
-                //
+                //recoge la informacion y la guarda en variables
                 String texto;
                 String nombre = Generos.peliculas.get(i).getNombrePelicula();
                 int fechaSalida = Generos.peliculas.get(i).getFechaSalida();
@@ -429,7 +480,7 @@ public class MainDialog extends javax.swing.JDialog {
                 boolean enPosesion = Generos.peliculas.get(i).isEnPosesion();
                 String categoria = Generos.peliculas.get(i).getCategoria();
 
-                //
+                //te la muestra
                 texto = nombre + "\t" + fechaSalida + "\t" + cantidad + "\t" + enPosesion + "\t" + categoria + "\r\n";
                 bw.write(texto);
             }
@@ -447,6 +498,23 @@ public class MainDialog extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_jButtonCrearCSVActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int posMatrizUno = Integer.valueOf(jTextField1.getText());
+        int posMatrizDos = Integer.valueOf(jTextField2.getText());
+        //recoge una pelicula y la almacena en la posicion indica
+            Generos.escaparate[posMatrizUno][posMatrizDos] = Generos.peliculas.get(contador);
+            System.out.println(genero.escaparate[0][0]);
+        
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        //Se utiliza el contador para indicar la pelicula en la que se encuentra
+        Generos.peliculas.remove(contador);
+        //se utiliza el metodo mostrar datos para que se actualizen los datos
+        mostrarDatos();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -491,6 +559,8 @@ public class MainDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAnterior;
     private javax.swing.JButton jButtonAñadirXML;
     private javax.swing.JButton jButtonCrearCSV;
@@ -503,6 +573,8 @@ public class MainDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldCantidad;
     private javax.swing.JTextField jTextFieldFecha;
     private javax.swing.JTextField jTextFieldGenero;
