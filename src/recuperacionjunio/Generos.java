@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Generos {
 
-    Peliculas pelicula;
+    Peliculas pelicula = new Peliculas();
 
     /**
      * Creacion de un arrayLista de peliculas falta estatico y cambiar el uso
@@ -21,17 +21,14 @@ public class Generos {
 
     //declararlo dentro para que cada ve que se ejecute se inicie se puede realizar con la i
     //creacion de un string para almacenar 
-    
     /**
-     *Creacion de la matriz
+     * Creacion de la matriz
      */
-        
     public static Peliculas[][] escaparate = new Peliculas[3][3];
-    
+
 //    void añadirEscaparate(int posMatrizUno, int posMatrizDos){
 //   String añadirAlEscaparate= escaparate[posMatrizUno][posMatrizDos];
 //    }
-    
     /**
      * Nos permitira añadir peliculas no retorna nada los generos cogerlos del
      * array
@@ -81,7 +78,7 @@ public class Generos {
         }
         return genero;
     }
-    
+
     /**
      * se encargara de subir o de bajar
      *

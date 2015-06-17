@@ -168,17 +168,21 @@ public class MainGeneros extends javax.swing.JDialog {
         try {
             pos1 = Integer.valueOf(jTextField1.getText()) - 1;
             pos2 = Integer.valueOf(jTextField2.getText()) - 1;
-            if (pos1 >= 0 && pos1 <= genero.peliculas.size()) {
-                if (pos2 >= 0 && pos2 <= genero.peliculas.size()) {
-                    genero.movimiento(pos1, true);
-                    jTextArea1.setText(genero.mostrarGenero());
-                } else {
-                    JOptionPane.showMessageDialog(this, "el numero indicado tiene que ser mayor que cero");
+       
+                if (pos1 >= 0 && pos1 <= genero.peliculas.size()) {
+                    if (pos2 >= 0 && pos2 <= genero.peliculas.size()) {
+                        genero.movimiento(pos1, true);
+                        jTextArea1.setText(genero.mostrarGenero());
+                    } else {
+                        JOptionPane.showMessageDialog(this, "el numero indicado tiene que ser mayor que cero");
+                    }
                 }
-            }
-        } catch (NumberFormatException e) {
+            
+            }catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error: El valor indicado no es un número");
         }
+        
+
     }//GEN-LAST:event_jButtonBajarActionPerformed
 
     /**
