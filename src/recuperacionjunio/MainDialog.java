@@ -171,7 +171,7 @@ public class MainDialog extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Guardar en Posicion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -193,37 +193,31 @@ public class MainDialog extends javax.swing.JDialog {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton1))
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonSiguiente)
-                        .addGap(101, 101, 101)
-                        .addComponent(jButtonAnterior))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButtonAnterior)
+                                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel2)
+                    .addComponent(jButtonSiguiente)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextFieldPosesion, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
+                        .addGap(71, 71, 71)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButtonAñadirXML, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
                             .addComponent(jButtonCrearCSV, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -237,8 +231,14 @@ public class MainDialog extends javax.swing.JDialog {
                                 .addComponent(jButtonNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1)))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,7 +387,7 @@ public class MainDialog extends javax.swing.JDialog {
         //sin la linea FILES_AND_DIRECTORIES solo se mostrarian los archivos
         leerXML.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
-        //
+        //no se va abrir hasta que no este aprobado
         if (leerXML.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 
             //te da la ruta absoluta de donde esta el archivo puesto
@@ -410,10 +410,11 @@ public class MainDialog extends javax.swing.JDialog {
                 //Recorrer la lista de Pelicula
                 //te recorre los datosPlicula
                 for (int i = 0; i < datosPeliculas.getLength(); i++) {
-                    //Obtener de la lista un Pelicula tras otro
+                    //Obtener de la lista una Pelicula tras otro
                     //guarda los datos de todas las peliculas
                     Node pelicula1 = datosPeliculas.item(i);
                     Peliculas añadirPeli = new Peliculas();
+                    
                     //Obtener la lista de los datos que contiene la Pelicula
                     NodeList datosPeli = pelicula1.getChildNodes();
 
@@ -450,7 +451,7 @@ public class MainDialog extends javax.swing.JDialog {
                             }
                         }
                     }
-                    //Guarda en las caracteristicas del movil el xml
+                    //Guarda en las caracteristicas del pelicula el xml
                     genero.peliculas.add(añadirPeli);
                 }
             } catch (SAXException ex) {
@@ -486,7 +487,9 @@ public class MainDialog extends javax.swing.JDialog {
                 String categoria = Generos.peliculas.get(i).getCategoria();
 
                 //te la muestra
+                //"/t" nos hace una tabulacion
                 texto = nombre + "\t" + fechaSalida + "\t" + cantidad + "\t" + enPosesion + "\t" + categoria + "\r\n";
+                //nos lo escribe en un fichero                
                 bw.write(texto);
             }
             JOptionPane.showMessageDialog(this, "filmoteca creada");
@@ -505,20 +508,23 @@ public class MainDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonCrearCSVActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        int posMatrizUno = Integer.valueOf(jTextField1.getText());
-        int posMatrizDos = Integer.valueOf(jTextField2.getText());
-        if (posMatrizUno>=0 && posMatrizUno<=Generos.escaparate.length) {
-            if (posMatrizDos>=0 && posMatrizDos<=Generos.escaparate.length) {
-                Generos.escaparate[posMatrizUno][posMatrizDos] = Generos.peliculas.get(contador);
-            }else{
-            JOptionPane.showMessageDialog(this, "El numero Dos tiene que ser mayor que cero");
+        try {
+            int posMatrizUno = Integer.valueOf(jTextField1.getText());
+            int posMatrizDos = Integer.valueOf(jTextField2.getText());
+            
+            if (posMatrizUno >= 0 && posMatrizUno <= Generos.escaparate.length) {
+                if (posMatrizDos >= 0 && posMatrizDos <= Generos.escaparate.length) {
+                    Generos.escaparate[posMatrizUno][posMatrizDos] = Generos.peliculas.get(contador);
+                } else {
+                    JOptionPane.showMessageDialog(this, "El numero Dos tiene que ser mayor que cero");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "El numero Dos tiene que ser mayor que cero");
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "El numero Dos tiene que ser mayor que cero");
-        }
         //recoge una pelicula y la almacena en la posicion indica
-        
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Tiene que poner un numero");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
